@@ -1,0 +1,2 @@
+# JavaFx-GuavaEventBus
+在javafx中，使用guava的EventBus来实现Controller之间传递数据

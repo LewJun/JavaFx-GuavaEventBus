@@ -1,8 +1,10 @@
 package org.example.lewjun.modules.main;
 
 import com.google.common.eventbus.Subscribe;
+import javafx.print.PrinterJob;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import org.example.lewjun.base.BaseController;
 import org.example.lewjun.modules.ac01.Ac01App;
 import org.example.lewjun.modules.ac01.Ac01Event;
@@ -17,6 +19,12 @@ public class MainController extends BaseController {
     public Button btnAc01;
     public Label lbl;
     public Button btnAc02;
+
+    private Stage stage;
+
+    public void setStage(Stage primaryStage) {
+        this.stage = primaryStage;
+    }
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {

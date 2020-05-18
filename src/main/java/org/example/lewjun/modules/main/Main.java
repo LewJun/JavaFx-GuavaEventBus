@@ -25,6 +25,8 @@ public class Main extends Application {
         primaryStage.setTitle("Main");
 
         final MainController controller = loader.getController();
+        controller.setStage(primaryStage);
+
         EventBusUtil.register(controller);
 
         primaryStage.setOnCloseRequest(event -> EventBusUtil.unregister(controller));

@@ -1,6 +1,7 @@
 package org.example.lewjun.modules.main;
 
 import com.google.common.eventbus.Subscribe;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import org.example.lewjun.base.BaseController;
@@ -8,6 +9,7 @@ import org.example.lewjun.modules.ac01.Ac01App;
 import org.example.lewjun.modules.ac01.Ac01Event;
 import org.example.lewjun.modules.ac02.Ac02App;
 import org.example.lewjun.modules.ac02.Ac02Event;
+import org.example.lewjun.modules.dialog.DialogApp;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,5 +34,9 @@ public class MainController extends BaseController {
     @Subscribe
     private void subscribeMainEvent(final MainEvent event) {
         lbl.setText(String.format("%s, %s", event.aac001, event.aac002));
+    }
+
+    public void openDialog(final ActionEvent actionEvent) {
+        new DialogApp().showAndWait();
     }
 }

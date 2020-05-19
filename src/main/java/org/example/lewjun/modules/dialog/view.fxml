@@ -7,4 +7,5 @@
       prefWidth="400" prefHeight="300"
 >
     <Button text="ChoiceDialog" onAction="#openChoiceDialog"/>
+    <Button text="TextInputDialog" onAction="#openTextInputDialog"/>
 </VBox>

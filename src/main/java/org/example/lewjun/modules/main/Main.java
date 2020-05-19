@@ -3,6 +3,8 @@ package org.example.lewjun.modules.main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import org.example.lewjun.util.EventBusUtil;
 
@@ -29,14 +31,36 @@ public class Main extends Application {
                 )
         );
         primaryStage.setScene(new Scene(loader.load()));
+
+        onCloseRequest();
+
         primaryStage.setTitle("Main");
 
         controller = loader.getController();
-        controller.setStage(primaryStage);
 
         handlerEventBus();
 
         primaryStage.show();
+    }
+
+    /**
+     * 处理关闭事件
+     */
+    private void onCloseRequest() {
+        stage.setOnCloseRequest(event -> {
+            // allow user to decide between yes and no
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Do you really want to close this application?",
+                    ButtonType.YES,
+                    ButtonType.NO);
+
+            // clicking X also means no
+            ButtonType result = alert.showAndWait().orElse(ButtonType.NO);
+
+            if (ButtonType.NO.equals(result)) {
+                event.consume();
+            }
+        });
     }
 
 

@@ -2,7 +2,9 @@ package org.example.lewjun.modules.main;
 
 import com.google.common.eventbus.Subscribe;
 import javafx.print.PrinterJob;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.example.lewjun.base.BaseController;
@@ -20,14 +22,9 @@ public class MainController extends BaseController {
     public Label lbl;
     public Button btnAc02;
 
-    private Stage stage;
-
-    public void setStage(Stage primaryStage) {
-        this.stage = primaryStage;
-    }
-
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
+
         btnAc01.setOnAction(event -> new Ac01App().setTitle("Ac01").initData(new Ac01Event("ac01")).showAndWait());
 
         btnAc02.setOnAction(event -> new Ac02App().setTitle("Ac02").initData(new Ac02Event("ac02")).showAndWait());

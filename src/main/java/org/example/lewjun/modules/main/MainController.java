@@ -1,12 +1,8 @@
 package org.example.lewjun.modules.main;
 
 import com.google.common.eventbus.Subscribe;
-import javafx.print.PrinterJob;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import org.example.lewjun.base.BaseController;
 import org.example.lewjun.modules.ac01.Ac01App;
 import org.example.lewjun.modules.ac01.Ac01Event;

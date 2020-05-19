@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.lewjun.util.EventBusUtil;
 
+import java.util.Objects;
+
 /**
  * Hello world!
  */
@@ -14,8 +16,13 @@ public class Main extends Application {
         launch(args);
     }
 
+    private MainController controller;
+    private Stage stage;
+
     @Override
     public void start(final Stage primaryStage) throws Exception {
+        stage = primaryStage;
+
         final FXMLLoader loader = new FXMLLoader(
                 getClass().getResource(
                         "view.fxml"
@@ -24,15 +31,21 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(loader.load()));
         primaryStage.setTitle("Main");
 
-        final MainController controller = loader.getController();
+        controller = loader.getController();
         controller.setStage(primaryStage);
 
-        EventBusUtil.register(controller);
-
-        primaryStage.setOnCloseRequest(event -> EventBusUtil.unregister(controller));
+        handlerEventBus();
 
         primaryStage.show();
     }
 
 
+    private void handlerEventBus() {
+        if (Objects.isNull(controller)) return;
+        // 注册controller
+        EventBusUtil.register(controller);
+
+        // 当stage关闭的时候，取消注册controller
+        stage.setOnCloseRequest(event -> EventBusUtil.unregister(controller));
+    }
 }

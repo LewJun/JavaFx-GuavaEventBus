@@ -8,4 +8,5 @@
 >
     <Button text="ChoiceDialog" onAction="#openChoiceDialog"/>
     <Button text="TextInputDialog" onAction="#openTextInputDialog"/>
+    <Button text="Custom Button text" onAction="#customButtonText"/>
 </VBox>

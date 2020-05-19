@@ -1,6 +1,8 @@
 package org.example.lewjun.modules.dialog;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.TextInputDialog;
 import org.example.lewjun.base.BaseController;
@@ -38,5 +40,19 @@ public class DialogController extends BaseController {
             }
         }).orElse("click the X or cancel");
         System.out.println(ret);
+    }
+
+    /**
+     * 自定义按钮文字
+     *
+     * @param event
+     */
+    public void customButtonText(final ActionEvent event) {
+        final ButtonType hello = new ButtonType("hello");
+        final ButtonType bye = new ButtonType("bye");
+
+        final Alert alert = new Alert(Alert.AlertType.NONE, "Greeting", hello, bye);
+        final ButtonType buttonType = alert.showAndWait().orElse(bye);
+        System.out.println(buttonType.getText());
     }
 }

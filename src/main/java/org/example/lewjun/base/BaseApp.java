@@ -2,6 +2,7 @@ package org.example.lewjun.base;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.lewjun.util.EventBusUtil;
@@ -14,10 +15,6 @@ public abstract class BaseApp<Controller extends BaseController> {
     protected Stage stage;
     protected Controller controller;
 
-    protected String getResName() {
-        return "view.fxml";
-    }
-
     public BaseApp() {
         try {
             final FXMLLoader loader = new FXMLLoader(getClass().getResource(getResName()));
@@ -26,6 +23,8 @@ public abstract class BaseApp<Controller extends BaseController> {
             stage.setResizable(false);
             stage.setMaximized(false);
 
+            stage.getIcons().add(new Image("assets/images/user.png"));
+
             controller = loader.getController();
 
             handlerEventBus();
@@ -33,6 +32,10 @@ public abstract class BaseApp<Controller extends BaseController> {
         } catch (final IOException e) {
             e.printStackTrace();
         }
+    }
+
+    protected String getResName() {
+        return "view.fxml";
     }
 
     private void handlerEventBus() {

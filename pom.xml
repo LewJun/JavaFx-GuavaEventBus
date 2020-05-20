@@ -87,6 +87,56 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <!--
+Requirements
+
+Maven 3.5 (older versions might work too)
+Java Developer Kit 8 with at least Update 40
+OS-specific requirements
+
+(Windows) EXE installers: Inno Setup
+(Windows) MSI installers: WiX (at least version 3.7)
+(Linux) DEB installers: dpkg-deb
+(Linux) RPM installers: rpmbuild
+(Mac) DMG installers: hdiutil
+(Mac) PKG installers: pkgbuild
+            To create your executable file with JavaFX-magic, call mvn jfx:jar. The jar-file will be placed at target/jfx/app.
+            -->
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.8.3</version>
+                <configuration>
+                    <vendor>org.example.lewjun</vendor>
+                    <mainClass>org.example.lewjun.modules.main.Main</mainClass>
+                    <bundleArguments>
+                        <icon>${project.basedir}/assets/images/user.png</icon>
+                    </bundleArguments>
+                    <verbose>true</verbose>
+                    <!--                    <bundler>exe</bundler>-->
+                    <!--<nativeReleaseVersion>1.0</nativeReleaseVersion>-->
+                    <nativeReleaseVersion>${project.version}</nativeReleaseVersion>
+                    <appName>${project.artifactId}</appName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-jfxjar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create-native</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-native</goal>
+                        </goals>
+                        <configuration>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>

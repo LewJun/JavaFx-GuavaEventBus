@@ -55,4 +55,42 @@ public class DialogController extends BaseController {
         final ButtonType buttonType = alert.showAndWait().orElse(bye);
         System.out.println(buttonType.getText());
     }
+
+    /**
+     * +----------------------------------------+
+     * |           Information Dialog           |
+     * |----------------------------------------|
+     * |  Look, an Information Dialog    [icon] |
+     * |                                        |
+     * |----------------------------------------|
+     * |                                        |
+     * |  I have a great message for you!       |
+     * |                                        |
+     * |----------------------------------------|
+     * |                                        |
+     * |                             [OK]       |
+     * +----------------------------------------+
+     *
+     * @param evt
+     */
+    public void informationDialog(final ActionEvent evt) {
+        final Alert alert = new Alert(Alert.AlertType.INFORMATION, "",
+                ButtonType.OK, ButtonType.NO, ButtonType.YES, ButtonType.CANCEL, ButtonType.APPLY, ButtonType.CLOSE
+                , ButtonType.FINISH, ButtonType.NEXT, ButtonType.PREVIOUS, new ButtonType("我知道了")
+        );
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText("Look, an Information Dialog");
+        // 不显示HeaderText
+        alert.setHeaderText(null);
+        alert.setContentText("I have a great message for you!");
+
+        final ButtonType buttonType = alert.showAndWait().orElse(ButtonType.NO);
+        if (buttonType.equals(ButtonType.OK)) {
+            System.out.println("ok");
+        } else {
+            System.out.println("click X or not OK button");
+        }
+
+        System.out.println(buttonType.getText());
+    }
 }

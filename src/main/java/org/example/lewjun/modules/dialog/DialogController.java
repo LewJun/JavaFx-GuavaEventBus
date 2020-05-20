@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import javafx.util.StringConverter;
@@ -21,11 +23,14 @@ import java.util.ResourceBundle;
 
 public class DialogController extends BaseController {
     public DatePicker datePicker;
+    public Button customLoginDialog;
 
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         super.initialize(location, resources);
         handlerDatePicker();
+
+        customLoginDialog.setGraphic(new ImageView(new Image("assets/images/user.png")));
     }
 
     void handlerDatePicker() {

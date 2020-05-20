@@ -10,6 +10,6 @@
     <Button text="TextInputDialog" onAction="#openTextInputDialog"/>
     <Button text="Custom Button text" onAction="#customButtonText"/>
     <Button text="Information Dialog" onAction="#informationDialog"/>
-    <Button text="Custom Login Dialog" onAction="#customLoginDialog"/>
+    <Button text="Custom Login Dialog" onAction="#customLoginDialog" fx:id="customLoginDialog"/>
     <DatePicker fx:id="datePicker" promptText="你的生日？"/>
 </VBox>

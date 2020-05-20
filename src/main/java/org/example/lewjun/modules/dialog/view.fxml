@@ -11,4 +11,5 @@
     <Button text="Custom Button text" onAction="#customButtonText"/>
     <Button text="Information Dialog" onAction="#informationDialog"/>
     <Button text="Custom Login Dialog" onAction="#customLoginDialog"/>
+    <DatePicker fx:id="datePicker" promptText="你的生日？"/>
 </VBox>

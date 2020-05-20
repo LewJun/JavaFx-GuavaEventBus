@@ -7,14 +7,61 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import javafx.util.StringConverter;
 import org.example.lewjun.base.BaseController;
 
+import java.net.URL;
 import java.text.MessageFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class DialogController extends BaseController {
+    public DatePicker datePicker;
+
+    @Override
+    public void initialize(final URL location, final ResourceBundle resources) {
+        super.initialize(location, resources);
+        handlerDatePicker();
+    }
+
+    void handlerDatePicker() {
+        final String pattern = "yyyy/MM/dd";
+        datePicker.setTooltip(new Tooltip("this is a tooltip"));
+        datePicker.setEditable(false);
+        datePicker.setValue(LocalDate.now());
+        datePicker.setPromptText(pattern.toLowerCase());
+        datePicker.setConverter(new StringConverter<LocalDate>() {
+            final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+            @Override
+            public String toString(final LocalDate localDate) {
+                if (localDate != null) {
+                    return dateFormatter.format(localDate);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(final String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        });
+
+        datePicker.setOnAction(v -> {
+            final LocalDate localDate = datePicker.getValue();
+            System.out.println("Selected Date:" + localDate);
+        });
+    }
+
     public void openChoiceDialog(final ActionEvent event) {
         final List<String> choices = Arrays.asList("1225", "1107", "0702", "0102", "Other");
         final ChoiceDialog<String> dialog = new ChoiceDialog<>(choices.get(0), choices);

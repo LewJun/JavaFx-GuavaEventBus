@@ -10,8 +10,12 @@ import org.example.lewjun.modules.ac01.Ac01Event;
 import org.example.lewjun.modules.ac02.Ac02App;
 import org.example.lewjun.modules.ac02.Ac02Event;
 import org.example.lewjun.modules.dialog.DialogApp;
+import org.example.lewjun.util.ApiUrl;
+import org.example.lewjun.util.HttpUtil;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MainController extends BaseController {
@@ -38,5 +42,35 @@ public class MainController extends BaseController {
 
     public void openDialog(final ActionEvent actionEvent) {
         new DialogApp().showAndWait();
+    }
+
+    public void openThreading(final ActionEvent event) {
+        final Map<String, Object> params = new HashMap<>(1);
+        params.put("mocky-delay", "3s");
+        HttpUtil.execute(ApiUrl.getObj,
+                params,
+                null, null, null,
+                new HttpUtil.OnHttpCallback<ApiUrl.Obj>() {
+                    @Override
+                    public void onStart() {
+                        System.out.println("开始转圈圈");
+                    }
+
+                    @Override
+                    public void onSuccess(final ApiUrl.Obj data) {
+                        // 只能在UI线程中更新UI
+                        runOnUIThread(() -> lbl.setText(data.hello));
+                    }
+
+                    @Override
+                    public void onError(final String err) {
+                        System.out.println(err);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        System.out.println("停止转圈圈");
+                    }
+                });
     }
 }

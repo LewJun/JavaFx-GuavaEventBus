@@ -38,6 +38,12 @@ class ApiUrl {
             }.getType()
     )
 
+    static final ApiUrl getFileNoContentLength = new ApiUrl("https://www.mocky.io/assets/js/ace/mode-json.js",
+            EnumHttpMethod.GET_FILE,
+            new TypeToken<ApiResult<byte[]>>() {
+            }.getType()
+    )
+
     enum EnumHttpMethod {
         GET, POST, GET_FILE, POST_FILE, POST_JSON
     }

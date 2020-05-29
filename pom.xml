@@ -16,9 +16,42 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <groovy.version>2.5.5</groovy.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-json</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-groovysh</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-jsr223</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-test</artifactId>
+            <version>${groovy.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -100,6 +133,22 @@
                 </includes>
                 <filtering>false</filtering>
             </resource>
+
+            <resource>
+                <!-- 这里是放在 src/main/java-->
+                <directory>src/main/groovy</directory>
+                <includes>
+                    <!-- 配置assets目录为静态资源目录-->
+                    <include>**/assets/**</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.fxml</include>
+                    <include>**/fxml/*.fxml</include>
+                    <!-- 如果想要弄个包名专门放fxml文件，像上一行这样添加设置 -->
+                    <!-- 之后，使用getResource("fxml/xx.fxml")这样子 -->
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
@@ -158,7 +207,7 @@ OS-specific requirements
                 <version>8.8.3</version>
                 <configuration>
                     <vendor>org.example.lewjun</vendor>
-                    <mainClass>org.example.lewjun.modules.main.Main</mainClass>
+                    <mainClass>org.example.lewjun.modules.main.MainApp</mainClass>
                     <bundleArguments>
                         <icon>${project.basedir}/assets/images/user.png</icon>
                     </bundleArguments>

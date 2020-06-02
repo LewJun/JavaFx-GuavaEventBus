@@ -3,11 +3,14 @@ package org.example.lewjun
 import org.example.lewjun.model.Ac01
 import org.example.lewjun.util.ApiUrl
 import org.example.lewjun.util.HttpUtil
+import org.slf4j.LoggerFactory
 
 class HttpUtilTest extends GroovyTestCase {
+    private static final def logger = LoggerFactory.getLogger(HttpUtilTest.class)
+
     void testGetFail() {
         HttpUtil.execute(ApiUrl.fail,
-                ["seq": System.currentTimeMillis().toString()],
+                ["seq": UUID.randomUUID()],
                 null,
                 null,
                 null,
@@ -15,22 +18,27 @@ class HttpUtilTest extends GroovyTestCase {
 
                     @Override
                     void onStart() {
-                        println "onStart"
+                        logger.info "onStart"
                     }
 
                     @Override
                     void onSuccess(Ac01 data) {
-                        println data.aac002
+                        logger.info data.aac002
                     }
 
                     @Override
                     void onError(String err) {
-                        println err
+                        logger.error err
+                    }
+
+                    @Override
+                    void onDownload(int progress, long received, long total) {
+
                     }
 
                     @Override
                     void onFinish() {
-                        println "onFinish"
+                        logger.info "onFinish"
                     }
                 })
 
@@ -39,7 +47,7 @@ class HttpUtilTest extends GroovyTestCase {
 
     void testGetAc01() {
         HttpUtil.execute(ApiUrl.getAc01,
-                ["seq": System.currentTimeMillis().toString()],
+                ["seq": UUID.randomUUID()],
                 null,
                 null,
                 null,
@@ -47,22 +55,27 @@ class HttpUtilTest extends GroovyTestCase {
 
                     @Override
                     void onStart() {
-                        println "onStart"
+                        logger.info "onStart"
                     }
 
                     @Override
                     void onSuccess(Ac01 data) {
-                        println data.aac002
+                        logger.info data.aac002
                     }
 
                     @Override
                     void onError(String err) {
-                        println err
+                        logger.error err
+                    }
+
+                    @Override
+                    void onDownload(int progress, long received, long total) {
+                        logger.info "$progress/$received/$total"
                     }
 
                     @Override
                     void onFinish() {
-                        println "onFinish"
+                        logger.info "onFinish"
                     }
                 })
 
@@ -71,30 +84,78 @@ class HttpUtilTest extends GroovyTestCase {
 
     void testGetFile() {
         HttpUtil.execute(ApiUrl.getFile,
-                ["seq": System.currentTimeMillis().toString()],
+                ["seq": UUID.randomUUID()],
                 null,
                 null,
                 null,
-                new HttpUtil.OnHttpCallback<byte[]>() {
+                new HttpUtil.OnHttpCallback<HttpUtil.GetFileInfo>() {
 
                     @Override
                     void onStart() {
-                        println "onStart"
+                        logger.info "onStart"
                     }
 
                     @Override
-                    void onSuccess(byte[] data) {
-                        println data.size()
+                    void onSuccess(HttpUtil.GetFileInfo data) {
+                        logger.info "data.getPath: ${data.file.getPath()}"
+                        logger.info "data.contentType: ${data.contentType}"
+                        logger.info "data.contentLength: ${data.contentLength}"
+                        logger.info "data.file.size: ${data.file.size()}"
                     }
 
                     @Override
                     void onError(String err) {
-                        println err
+                        logger.error err
+                    }
+
+                    @Override
+                    void onDownload(int progress, long received, long total) {
+                        logger.info "$progress/$received/$total"
                     }
 
                     @Override
                     void onFinish() {
-                        println "onFinish"
+                        logger.info "onFinish"
+                    }
+                })
+
+        Thread.sleep(30000)
+    }
+
+    void testGetFileNoContentLength() {
+        HttpUtil.execute(ApiUrl.getFileNoContentLength,
+                ["seq": UUID.randomUUID()],
+                null,
+                null,
+                null,
+                new HttpUtil.OnHttpCallback<HttpUtil.GetFileInfo>() {
+
+                    @Override
+                    void onStart() {
+                        logger.info "onStart"
+                    }
+
+                    @Override
+                    void onSuccess(HttpUtil.GetFileInfo data) {
+                        logger.info "data.getPath: ${data.file.getPath()}"
+                        logger.info "data.contentType: ${data.contentType}"
+                        logger.info "data.contentLength: ${data.contentLength}"
+                        logger.info "data.file.size: ${data.file.size()}"
+                    }
+
+                    @Override
+                    void onError(String err) {
+                        logger.error err
+                    }
+
+                    @Override
+                    void onDownload(int progress, long received, long total) {
+
+                    }
+
+                    @Override
+                    void onFinish() {
+                        logger.info "onFinish"
                     }
                 })
 

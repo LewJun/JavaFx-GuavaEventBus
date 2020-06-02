@@ -32,15 +32,17 @@ class ApiUrl {
             new TypeToken<ApiResult<List<Ac01>>>() {
             }.getType())
 
-    static final ApiUrl getFile = new ApiUrl("https://cdn.abcotvs.com/dip/images/5261705_042019-cc-ss-sumatran-tiger-img.jpg?w=1600",
+    // http://sqdownd.onlinedown.net/down/com.cnvcs.gomoku-1.45-145.apk
+    // https://s.cn.bing.net/th?id=OJ.zPJyccrUWF0Gsw&pid=MsnJVFeeds&w=16&h=16
+    static final ApiUrl getFile = new ApiUrl("http://sqdownd.onlinedown.net/down/com.cnvcs.gomoku-1.45-145.apk",
             EnumHttpMethod.GET_FILE,
-            new TypeToken<ApiResult<byte[]>>() {
+            new TypeToken<HttpUtil.GetFileInfo>() {
             }.getType()
     )
 
-    static final ApiUrl getFileNoContentLength = new ApiUrl("https://www.mocky.io/assets/js/ace/mode-json.js",
+    static final ApiUrl getFileNoContentLength = new ApiUrl("https://libs.cdnjs.net/vue/0.6.0/vue.min.js",
             EnumHttpMethod.GET_FILE,
-            new TypeToken<ApiResult<byte[]>>() {
+            new TypeToken<HttpUtil.GetFileInfo>() {
             }.getType()
     )
 
